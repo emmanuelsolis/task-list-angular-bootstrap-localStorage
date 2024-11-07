@@ -1,1 +1,22 @@
-<p>task-list works!</p>
+<h1 text-center>Lista de tareas</h1>
+<div class="container mt-5">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td class="d-flex flex-row gap-1">
+                    <button class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
