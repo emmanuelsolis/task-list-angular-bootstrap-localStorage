@@ -1,6 +1,8 @@
 // src/app/components/task-list/task-list.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -13,20 +15,19 @@ export class TaskListComponent {
 
   editingTask: Task = { id: '', title: '', description: '' };
 
+  constructor(private modalService: NgbModal) { }
+
   onDelete(id: string) {
     this.deleteTask.emit(id);
   }
 
-  onEdit(task: Task) {
+  onEdit(task: Task, content: any) {
     this.editingTask = { ...task };
-    // Open modal
-    const modal = document.getElementById('editModal');
-    if (modal) {
-      const bootstrapModal = new (window as any).bootstrap.Modal(modal);
-      bootstrapModal.show();
-    }
+    this.modalService.open(content);
   }
-  saveEdit() {
+
+  saveEdit(modal: any) {
     this.editTask.emit(this.editingTask);
+    modal.close();
   }
 }

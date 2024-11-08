@@ -8,6 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskService } from './services/task.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TaskService } from './services/task.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule
+    NgbModule,
+    FormsModule, ReactiveFormsModule,
   ],
   providers: [TaskService],
   exports: [],
