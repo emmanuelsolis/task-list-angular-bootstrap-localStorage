@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { TaskService } from '../../services/task.service';
+// src/app/components/task-form/task-form.component.ts
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-form',
@@ -7,20 +8,20 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent {
-  constructor(
-    public taskService: TaskService
-  ){  }
-  ngOnInit(){}
+  @Output() addTask = new EventEmitter<Task>();
+  title: string = '';
+  description: string = '';
 
-  addTask(newTitle: HTMLInputElement, newDescript: HTMLTextAreaElement){
-    console.log("adding..", newTitle.value, newDescript.value)
-    this.taskService.addTask({
-      title: newTitle.value,
-      description: newDescript.value
-    });
-    newTitle.value = "";
-    newDescript.value = "";
-    newTitle.focus();
-    return false
+  onSubmit() {
+    if (this.title.trim() && this.description.trim()) {
+      const newTask: Task = {
+        id: Date.now().toString(),
+        title: this.title,
+        description: this.description
+      };
+      this.addTask.emit(newTask);
+      this.title = '';
+      this.description = '';
+    }
   }
 }

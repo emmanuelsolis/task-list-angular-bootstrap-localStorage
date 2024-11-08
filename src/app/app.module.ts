@@ -6,22 +6,22 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
-import { TaskComponent } from './components/task/task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskService } from './services/task.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TaskFormComponent,
-    TaskComponent,
     TaskListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule
+    NgbModule,
+    FormsModule, ReactiveFormsModule,
   ],
   providers: [TaskService],
   exports: [],
