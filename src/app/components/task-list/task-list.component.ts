@@ -1,25 +1,32 @@
-import { TaskService } from './../../services/task.service';
-import { Component } from '@angular/core';
-import { Task } from 'src/app/models/Task';
-
+// src/app/components/task-list/task-list.component.ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Task } from '../../models/task.model';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent {
-  tasks: Task[] = [];
-  constructor(
-    public TaskService: TaskService
-  ){  }
-  ngOnInit() {
-    this.tasks = this.TaskService.getTasks();
+  @Input() tasks: Task[] = [];
+  @Output() deleteTask = new EventEmitter<string>();
+  @Output() editTask = new EventEmitter<Task>();
+
+  editingTask: Task = { id: '', title: '', description: '' };
+
+  onDelete(id: string) {
+    this.deleteTask.emit(id);
   }
-  deleteTask(task:Task){
-    if(confirm('Estas seguro que quieres eliminar esta tarea?')){
-      this.TaskService.deleteTask(task);
+
+  onEdit(task: Task) {
+    this.editingTask = { ...task };
+    // Open modal
+    const modal = document.getElementById('editModal');
+    if (modal) {
+      const bootstrapModal = new (window as any).bootstrap.Modal(modal);
+      bootstrapModal.show();
     }
-
   }
-
+  saveEdit() {
+    this.editTask.emit(this.editingTask);
+  }
 }

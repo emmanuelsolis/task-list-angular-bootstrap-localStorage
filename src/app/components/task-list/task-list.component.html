@@ -1,22 +1,47 @@
-<h1 text-center class="text-center">Lista de tareas</h1>
-<div class="container mt-5">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Descripcion</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let task of tasks">
-                <td>{{task.title}}</td>
-                <td>{{task.description}}</td>
-                <td class="d-flex flex-row gap-1">
-                    <button class="btn btn-primary">Editar</button>
-                    <button class="btn btn-danger" (click)="deleteTask(task)">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<!-- src/app/components/task-list/task-list.component.html -->
+<h2>Lista de tareas</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm me-2" (click)="onEdit(task)">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="onDelete(task.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <input [(ngModel)]="editingTask.title" name="editTitle" type="text" class="form-control" placeholder="Task title" required>
+          </div>
+          <div class="mb-3">
+            <textarea [(ngModel)]="editingTask.description" name="editDescription" class="form-control" placeholder="Task Description" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveEdit()" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

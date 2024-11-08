@@ -1,6 +1,6 @@
 import { TaskService } from './../../services/task.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from 'src/app/models/Task';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'ng-container[app-task]',
