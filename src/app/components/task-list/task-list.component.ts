@@ -14,7 +14,12 @@ export class TaskListComponent {
   ){  }
   ngOnInit() {
     this.tasks = this.TaskService.getTasks();
-    console.log(this.tasks);
+  }
+  deleteTask(task:Task){
+    if(confirm('Estas seguro que quieres eliminar esta tarea?')){
+      this.TaskService.deleteTask(task);
+    }
+
   }
 
 }

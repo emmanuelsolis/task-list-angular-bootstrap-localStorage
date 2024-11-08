@@ -20,5 +20,12 @@ export class TaskService {
   addTask(task: Task){
     this.tasks.push(task);
   }
+  deleteTask(task:Task){
+    for(let i=0; i < this.tasks.length; i++){
+      if(task === this.tasks[i]){
+        this.tasks.splice(i, 1);
+      }
+    }
+  }
 
 }

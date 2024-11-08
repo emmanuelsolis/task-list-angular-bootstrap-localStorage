@@ -18,7 +18,9 @@ export class TaskFormComponent {
       title: newTitle.value,
       description: newDescript.value
     });
-    console.log(this.taskService.getTasks());
+    newTitle.value = "";
+    newDescript.value = "";
+    newTitle.focus();
     return false
   }
 }
